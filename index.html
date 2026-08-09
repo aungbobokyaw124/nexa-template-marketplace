@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>neXa - Premium Website Templates Marketplace</title>
+    <meta name="description" content="Buy modern responsive website templates and digital products from neXa. Premium templates for creators, businesses, and developers.">
+    <meta name="keywords" content="website templates, premium templates, UI kits, landing pages, digital marketplace, responsive templates">
+    <meta name="author" content="neXa">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="neXa - Premium Website Templates Marketplace">
+    <meta property="og:description" content="Buy modern responsive website templates and digital products from neXa.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nexa-template-marketplace.com">
+    <meta property="og:image" content="https://nexa-template-marketplace.com/assets/images/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-text" id="preloaderText"></div>
+        </div>
+    </div>
+
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="container">
+            <p class="announcement-text">
+                <span class="announcement-icon">🚀</span>
+                <span data-i18n="announcement">New Premium Templates Released</span>
+            </p>
+            <a href="#templates" class="announcement-btn" data-i18n="explore_now">Explore Now</a>
+        </div>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="#" class="logo">
+                    <span class="logo-text">neXa</span>
+                </a>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="#home" class="nav-link" data-i18n="home">Home</a></li>
+                    <li class="nav-item"><a href="#templates" class="nav-link" data-i18n="templates">Templates</a></li>
+                    <li class="nav-item"><a href="#categories" class="nav-link" data-i18n="categories">Categories</a></li>
+                    <li class="nav-item"><a href="#pricing" class="nav-link" data-i18n="pricing">Pricing</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link" data-i18n="about">About</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link" data-i18n="contact">Contact</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <button class="language-toggle" id="langToggle" aria-label="Toggle language">
+                        <span class="lang-text">EN</span>
+                    </button>
+                    
+                    <button class="buy-btn" data-i18n="buy_now">Buy Now</button>
+                    
+                    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title" data-i18n="hero_title">Premium Website Templates For Modern Creators</h1>
+                    <p class="hero-description" data-i18n="hero_description">Launch your next digital project faster with beautiful, responsive and production-ready templates.</p>
+                    <div class="hero-buttons">
+                        <a href="#templates" class="btn btn-primary" data-i18n="explore_templates">Explore Templates</a>
+                        <a href="#pricing" class="btn btn-secondary" data-i18n="start_selling">Start Selling</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="template-slider" id="heroSlider">
+                        <!-- Template preview cards will be inserted by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Template Slider -->
+        <section class="featured-templates">
+            <div class="container">
+                <h2 class="section-title" data-i18n="featured_templates">Featured Templates</h2>
+                <p class="section-subtitle" data-i18n="featured_subtitle">Hand-picked premium templates loved by developers worldwide</p>
+                
+                <div class="carousel-container">
+                    <button class="carousel-btn prev" id="prevBtn" aria-label="Previous template">←</button>
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Carousel items will be inserted by JS -->
+                    </div>
+                    <button class="carousel-btn next" id="nextBtn" aria-label="Next template">→</button>
+                </div>
+                
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+        </section>
+
+        <!-- Category Section -->
+        <section class="categories" id="categories">
+            <div class="container">
+                <h2 class="section-title" data-i18n="browse_categories">Browse Categories</h2>
+                <p class="section-subtitle" data-i18n="categories_subtitle">Find the perfect template for your next project</p>
+                
+                <div class="category-grid" id="categoryGrid">
+                    <!-- Category cards will be inserted by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Template Shop Section -->
+        <section class="template-shop" id="templates">
+            <div class="container">
+                <h2 class="section-title" data-i18n="template_shop">Template Shop</h2>
+                <p class="section-subtitle" data-i18n="shop_subtitle">Production-ready templates for every need</p>
+                
+                <div class="filter-buttons" id="filterButtons">
+                    <button class="filter-btn active" data-filter="all" data-i18n="filter_all">All</button>
+                    <button class="filter-btn" data-filter="business" data-i18n="filter_business">Business</button>
+                    <button class="filter-btn" data-filter="portfolio" data-i18n="filter_portfolio">Portfolio</button>
+                    <button class="filter-btn" data-filter="saas" data-i18n="filter_saas">SaaS</button>
+                    <button class="filter-btn" data-filter="ecommerce" data-i18n="filter_ecommerce">Ecommerce</button>
+                </div>
+                
+                <div class="template-grid" id="templateGrid">
+                    <!-- Template cards will be inserted by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose neXa -->
+        <section class="why-nexa" id="about">
+            <div class="container">
+                <h2 class="section-title" data-i18n="why_nexa">Why Choose neXa</h2>
+                <p class="section-subtitle" data-i18n="why_subtitle">Built for developers who demand quality and efficiency</p>
+                
+                <div class="features-grid" id="featuresGrid">
+                    <!-- Feature cards will be inserted by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <h2 class="section-title" data-i18n="pricing_title">Simple Pricing</h2>
+                <p class="section-subtitle" data-i18n="pricing_subtitle">Choose the perfect plan for your needs</p>
+                
+                <div class="pricing-grid" id="pricingGrid">
+                    <!-- Pricing cards will be inserted by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title" data-i18n="testimonials_title">What Our Customers Say</h2>
+                <p class="section-subtitle" data-i18n="testimonials_subtitle">Trusted by thousands of developers and creators</p>
+                
+                <div class="testimonial-grid" id="testimonialGrid">
+                    <!-- Testimonial cards will be inserted by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq">
+            <div class="container">
+                <h2 class="section-title" data-i18n="faq_title">Frequently Asked Questions</h2>
+                <p class="section-subtitle" data-i18n="faq_subtitle">Everything you need to know about neXa templates</p>
+                
+                <div class="faq-list" id="faqList">
+                    <!-- FAQ items will be inserted by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <h2 class="cta-title" data-i18n="cta_title">Ready To Build Your Next Project?</h2>
+                <p class="cta-description" data-i18n="cta_description">Join thousands of developers using neXa templates to ship faster.</p>
+                <a href="#templates" class="btn btn-primary" data-i18n="browse_templates">Browse Templates</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <span class="logo-text">neXa</span>
+                    </a>
+                    <p class="footer-description" data-i18n="footer_description">Premium digital marketplace for modern creators and developers.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Twitter">Twitter</a>
+                        <a href="#" class="social-link" aria-label="GitHub">GitHub</a>
+                        <a href="#" class="social-link" aria-label="Discord">Discord</a>
+                        <a href="#" class="social-link" aria-label="YouTube">YouTube</a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 data-i18n="footer_products">Products</h4>
+                    <ul>
+                        <li><a href="#" data-i18n="footer_templates">Templates</a></li>
+                        <li><a href="#" data-i18n="footer_ui_kits">UI Kits</a></li>
+                        <li><a href="#" data-i18n="footer_landing_pages">Landing Pages</a></li>
+                        <li><a href="#" data-i18n="footer_dashboards">Dashboards</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 data-i18n="footer_resources">Resources</h4>
+                    <ul>
+                        <li><a href="#" data-i18n="footer_docs">Documentation</a></li>
+                        <li><a href="#" data-i18n="footer_blog">Blog</a></li>
+                        <li><a href="#" data-i18n="footer_changelog">Changelog</a></li>
+                        <li><a href="#" data-i18n="footer_community">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 data-i18n="footer_support">Support</h4>
+                    <ul>
+                        <li><a href="#" data-i18n="footer_contact">Contact</a></li>
+                        <li><a href="#" data-i18n="footer_faq">FAQ</a></li>
+                        <li><a href="#" data-i18n="footer_license">License</a></li>
+                        <li><a href="#" data-i18n="footer_privacy">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 neXa. <span data-i18n="copyright">All Rights Reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <!-- Scripts -->
+    <script src="js/language.js"></script>
+    <script src="js/slider.js"></script>
+    <script src="js/faq.js"></script>
+    <script src="js/app.js"></script>
+</body>
+                  </html>
