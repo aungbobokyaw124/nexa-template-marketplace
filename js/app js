@@ -1,0 +1,477 @@
+/**
+ * neXa Template Marketplace - Main Application
+ * Handles core functionality: preloader, navigation, scroll, filtering
+ */
+
+class NexaApp {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.setupPreloader();
+        this.setupNavigation();
+        this.setupSmoothScroll();
+        this.setupFiltering();
+        this.setupScrollReveal();
+        this.setupBackToTop();
+        this.generateContent();
+    }
+
+    /**
+     * Preloader Animation
+     */
+    setupPreloader() {
+        const preloader = document.getElementById('preloader');
+        const preloaderText = document.getElementById('preloaderText');
+        const text = 'neXa';
+        let index = 0;
+        let currentText = '';
+
+        const typeWriter = () => {
+            if (index < text.length) {
+                currentText += text[index];
+                preloaderText.textContent = currentText;
+                index++;
+                setTimeout(typeWriter, 200);
+            } else {
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }, 500);
+            }
+        };
+
+        document.body.style.overflow = 'hidden';
+        setTimeout(typeWriter, 300);
+    }
+
+    /**
+     * Mobile Navigation & Sticky Header
+     */
+    setupNavigation() {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const header = document.getElementById('header');
+
+        // Create mobile overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'mobile-overlay';
+        document.body.appendChild(overlay);
+
+        // Toggle mobile menu
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = 
+                navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close menu on overlay click
+        overlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close menu on link click
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Active link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navMenu.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    }
+
+    /**
+     * Smooth Scrolling for anchor links
+     */
+    setupSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.getElementById('header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    }
+
+    /**
+     * Template Filtering System
+     */
+    setupFiltering() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const templateGrid = document.getElementById('templateGrid');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filter = button.getAttribute('data-filter');
+                const templates = templateGrid.querySelectorAll('.template-item');
+
+                templates.forEach(template => {
+                    if (filter === 'all' || template.getAttribute('data-category') === filter) {
+                        template.style.display = 'block';
+                        template.style.animation = 'fadeInUp 0.5s ease forwards';
+                    } else {
+                        template.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+
+    /**
+     * Scroll Reveal Animation
+     */
+    setupScrollReveal() {
+        const revealElements = document.querySelectorAll(
+            '.category-card, .feature-card, .template-item, .pricing-card, .testimonial-card'
+        );
+
+        revealElements.forEach(el => {
+            el.classList.add('reveal');
+        });
+
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+    }
+
+    /**
+     * Back to Top Button
+     */
+    setupBackToTop() {
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    /**
+     * Generate Dynamic Content
+     */
+    generateContent() {
+        this.generateTemplateShop();
+        this.generateCategories();
+        this.generateFeatures();
+        this.generatePricing();
+        this.generateTestimonials();
+    }
+
+    /**
+     * Template Shop Items
+     */
+    generateTemplateShop() {
+        const templates = [
+            {
+                name: 'SaaS Landing Pro',
+                description: 'Modern SaaS landing page with conversion-optimized design',
+                category: 'saas',
+                price: 49,
+                badge: 'Best Seller',
+                image: 'SaaS Dashboard Preview'
+            },
+            {
+                name: 'Portfolio Studio',
+                description: 'Creative portfolio template for designers and artists',
+                category: 'portfolio',
+                price: 29,
+                badge: 'New',
+                image: 'Portfolio Layout Preview'
+            },
+            {
+                name: 'Business Corporate',
+                description: 'Professional business website with modern aesthetics',
+                category: 'business',
+                price: 39,
+                badge: 'Popular',
+                image: 'Business Website Preview'
+            },
+            {
+                name: 'Ecommerce Store',
+                description: 'Full-featured online store template with cart system',
+                category: 'ecommerce',
+                price: 59,
+                badge: 'Premium',
+                image: 'Ecommerce Interface Preview'
+            },
+            {
+                name: 'AI Startup Hub',
+                description: 'Futuristic template for AI and tech startups',
+                category: 'saas',
+                price: 49,
+                badge: 'Trending',
+                image: 'Startup Landing Preview'
+            },
+            {
+                name: 'Blog Magazine',
+                description: 'Clean and modern blog template with multiple layouts',
+                category: 'portfolio',
+                price: 19,
+                badge: 'Value',
+                image: 'Blog Magazine Preview'
+            }
+        ];
+
+        const templateGrid = document.getElementById('templateGrid');
+        
+        templates.forEach(template => {
+            const templateHTML = `
+                <div class="template-item" data-category="${template.category}">
+                    <div class="template-item-image">
+                        ${template.image}
+                        <span class="template-badge">${template.badge}</span>
+                    </div>
+                    <div class="template-item-content">
+                        <h3 class="template-item-name">${template.name}</h3>
+                        <p class="template-item-description">${template.description}</p>
+                        <div class="template-tech-stack">
+                            <span class="tech-badge">HTML</span>
+                            <span class="tech-badge">CSS</span>
+                            <span class="tech-badge">JS</span>
+                        </div>
+                        <div class="template-item-footer">
+                            <span class="template-price">$${template.price}</span>
+                            <div class="template-actions">
+                                <button class="btn btn-sm btn-outline">Preview</button>
+                                <button class="btn btn-sm btn-primary">Purchase</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            templateGrid.insertAdjacentHTML('beforeend', templateHTML);
+        });
+    }
+
+    /**
+     * Categories
+     */
+    generateCategories() {
+        const categories = [
+            { icon: '🌐', title: 'Website Templates', description: 'Complete website solutions for any business' },
+            { icon: '🚀', title: 'Landing Pages', description: 'High-converting landing page designs' },
+            { icon: '🎨', title: 'Portfolio', description: 'Showcase your work with stunning layouts' },
+            { icon: '🛍️', title: 'Ecommerce', description: 'Online store templates ready to sell' },
+            { icon: '📊', title: 'Dashboard UI', description: 'Admin panels and dashboard interfaces' },
+            { icon: '📝', title: 'Blog Templates', description: 'Content-focused blog and magazine designs' }
+        ];
+
+        const categoryGrid = document.getElementById('categoryGrid');
+        
+        categories.forEach(category => {
+            const categoryHTML = `
+                <div class="category-card">
+                    <span class="category-icon">${category.icon}</span>
+                    <h3 class="category-title">${category.title}</h3>
+                    <p class="category-description">${category.description}</p>
+                </div>
+            `;
+            
+            categoryGrid.insertAdjacentHTML('beforeend', categoryHTML);
+        });
+    }
+
+    /**
+     * Features / Why Choose neXa
+     */
+    generateFeatures() {
+        const features = [
+            { icon: '⚡', title: 'Fast Development', description: 'Production-ready code that helps you ship projects 10x faster' },
+            { icon: '✨', title: 'Clean Code', description: 'Well-structured, commented, and maintainable source code' },
+            { icon: '📱', title: 'Responsive Design', description: 'Perfect on all devices from mobile to desktop screens' },
+            { icon: '🔄', title: 'Lifetime Updates', description: 'Free updates for life with every template purchase' },
+            { icon: '🛠️', title: 'Developer Friendly', description: 'Built with modern tools and best practices' },
+            { icon: '🎯', title: 'Modern UI', description: 'Premium designs following latest UI/UX trends' }
+        ];
+
+        const featuresGrid = document.getElementById('featuresGrid');
+        
+        features.forEach(feature => {
+            const featureHTML = `
+                <div class="feature-card">
+                    <span class="feature-icon">${feature.icon}</span>
+                    <h3 class="feature-title">${feature.title}</h3>
+                    <p class="feature-description">${feature.description}</p>
+                </div>
+            `;
+            
+            featuresGrid.insertAdjacentHTML('beforeend', featureHTML);
+        });
+    }
+
+    /**
+     * Pricing Plans
+     */
+    generatePricing() {
+        const plans = [
+            {
+                name: 'Starter',
+                price: 19,
+                features: ['5 Templates', 'Basic Support', 'Regular Updates', 'Documentation', 'Community Access'],
+                featured: false
+            },
+            {
+                name: 'Professional',
+                price: 49,
+                features: ['20 Templates', 'Priority Support', 'All Updates', 'Advanced Docs', 'Source Files', 'Email Support'],
+                featured: true
+            },
+            {
+                name: 'Premium',
+                price: 99,
+                features: ['All Templates', '24/7 Support', 'Lifetime Updates', 'Full Documentation', 'All Source Files', 'Priority Access', 'Custom Requests'],
+                featured: false
+            }
+        ];
+
+        const pricingGrid = document.getElementById('pricingGrid');
+        
+        plans.forEach(plan => {
+            const pricingHTML = `
+                <div class="pricing-card ${plan.featured ? 'featured' : ''}">
+                    <h3 class="pricing-name">${plan.name}</h3>
+                    <div class="pricing-price">
+                        $${plan.price}
+                        <span class="pricing-period">/month</span>
+                    </div>
+                    <div class="pricing-features">
+                        ${plan.features.map(f => `<div class="pricing-feature">${f}</div>`).join('')}
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">Get Started</button>
+                </div>
+            `;
+            
+            pricingGrid.insertAdjacentHTML('beforeend', pricingHTML);
+        });
+    }
+
+    /**
+     * Testimonials
+     */
+    generateTestimonials() {
+        const testimonials = [
+            {
+                name: 'Sarah Chen',
+                role: 'Senior Developer',
+                avatar: 'SC',
+                text: 'neXa templates are incredibly well-built. The code quality is exceptional and saved me weeks of development time. Highly recommended for any serious developer.',
+                rating: 5
+            },
+            {
+                name: 'Marcus Johnson',
+                role: 'Startup Founder',
+                avatar: 'MJ',
+                text: 'We launched our MVP in just 3 days using a neXa template. The design is modern and the performance is outstanding. Best investment for our startup.',
+                rating: 5
+            },
+            {
+                name: 'Emma Williams',
+                role: 'UX Designer',
+                avatar: 'EW',
+                text: 'The attention to detail in neXa templates is remarkable. Every interaction is well thought out, and the responsive design works flawlessly across all devices.',
+                rating: 5
+            }
+        ];
+
+        const testimonialGrid = document.getElementById('testimonialGrid');
+        
+        testimonials.forEach(testimonial => {
+            const stars = '⭐'.repeat(testimonial.rating);
+            const testimonialHTML = `
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">${testimonial.avatar}</div>
+                        <div>
+                            <div class="testimonial-name">${testimonial.name}</div>
+                            <div class="testimonial-role">${testimonial.role}</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"${testimonial.text}"</p>
+                    <div class="testimonial-rating">${stars}</div>
+                </div>
+            `;
+            
+            testimonialGrid.insertAdjacentHTML('beforeend', testimonialHTML);
+        });
+    }
+}
+
+// Initialize the application when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    window.nexaApp = new NexaApp();
+});
+
+// Add fadeInUp animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+`;
+document.head.appendChild(style);
