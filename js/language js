@@ -1,0 +1,269 @@
+/**
+ * neXa Template Marketplace - Language System
+ * Bilingual support: English (EN) and Myanmar (MM)
+ */
+
+class LanguageManager {
+    constructor() {
+        this.currentLang = 'en';
+        this.translations = {};
+        this.init();
+    }
+
+    init() {
+        this.loadTranslations();
+        this.setupLanguageToggle();
+        this.applyTranslations();
+    }
+
+    /**
+     * Translation Dictionary
+     */
+    loadTranslations() {
+        this.translations = {
+            en: {
+                // Announcement
+                announcement: 'New Premium Templates Released',
+                explore_now: 'Explore Now',
+                
+                // Navigation
+                home: 'Home',
+                templates: 'Templates',
+                categories: 'Categories',
+                pricing: 'Pricing',
+                about: 'About',
+                contact: 'Contact',
+                buy_now: 'Buy Now',
+                
+                // Hero
+                hero_title: 'Premium Website Templates For Modern Creators',
+                hero_description: 'Launch your next digital project faster with beautiful, responsive and production-ready templates.',
+                explore_templates: 'Explore Templates',
+                start_selling: 'Start Selling',
+                
+                // Featured Templates
+                featured_templates: 'Featured Templates',
+                featured_subtitle: 'Hand-picked premium templates loved by developers worldwide',
+                
+                // Categories
+                browse_categories: 'Browse Categories',
+                categories_subtitle: 'Find the perfect template for your next project',
+                
+                // Template Shop
+                template_shop: 'Template Shop',
+                shop_subtitle: 'Production-ready templates for every need',
+                filter_all: 'All',
+                filter_business: 'Business',
+                filter_portfolio: 'Portfolio',
+                filter_saas: 'SaaS',
+                filter_ecommerce: 'Ecommerce',
+                
+                // Why neXa
+                why_nexa: 'Why Choose neXa',
+                why_subtitle: 'Built for developers who demand quality and efficiency',
+                
+                // Pricing
+                pricing_title: 'Simple Pricing',
+                pricing_subtitle: 'Choose the perfect plan for your needs',
+                
+                // Testimonials
+                testimonials_title: 'What Our Customers Say',
+                testimonials_subtitle: 'Trusted by thousands of developers and creators',
+                
+                // FAQ
+                faq_title: 'Frequently Asked Questions',
+                faq_subtitle: 'Everything you need to know about neXa templates',
+                
+                // CTA
+                cta_title: 'Ready To Build Your Next Project?',
+                cta_description: 'Join thousands of developers using neXa templates to ship faster.',
+                browse_templates: 'Browse Templates',
+                
+                // Footer
+                footer_description: 'Premium digital marketplace for modern creators and developers.',
+                footer_products: 'Products',
+                footer_templates: 'Templates',
+                footer_ui_kits: 'UI Kits',
+                footer_landing_pages: 'Landing Pages',
+                footer_dashboards: 'Dashboards',
+                footer_resources: 'Resources',
+                footer_docs: 'Documentation',
+                footer_blog: 'Blog',
+                footer_changelog: 'Changelog',
+                footer_community: 'Community',
+                footer_support: 'Support',
+                footer_contact: 'Contact',
+                footer_faq: 'FAQ',
+                footer_license: 'License',
+                footer_privacy: 'Privacy',
+                copyright: 'All Rights Reserved.'
+            },
+            mm: {
+                // Announcement
+                announcement: 'အရည်အသွေးမြင့် Website Template အသစ်များ ထွက်ရှိပါပြီ',
+                explore_now: 'ကြည့်ရှုရန်',
+                
+                // Navigation
+                home: 'မူလ',
+                templates: 'Templates',
+                categories: 'အမျိုးအစားများ',
+                pricing: 'ဈေးနှုန်း',
+                about: 'အကြောင်း',
+                contact: 'ဆက်သွယ်ရန်',
+                buy_now: 'ဝယ်ယူရန်',
+                
+                // Hero
+                hero_title: 'ခေတ်မီဖန်တီးသူများအတွက် အရည်အသွေးမြင့် Website Templates',
+                hero_description: 'လှပပြီး responsive ဖြစ်ကာ ထုတ်လုပ်မှုအဆင်သင့် templates များဖြင့် သင့်နောက်ထပ် ဒစ်ဂျစ်တယ်ပရောဂျက်ကို ပိုမိုမြန်ဆန်စွာ စတင်လိုက်ပါ။',
+                explore_templates: 'Templates ကြည့်ရန်',
+                start_selling: 'စတင်ရောင်းချရန်',
+                
+                // Featured Templates
+                featured_templates: 'ထူးခြားသော Templates',
+                featured_subtitle: 'ကမ္ဘာတစ်ဝှမ်းရှိ developer များ နှစ်သက်သော ရွေးချယ်ထားသည့် အရည်အသွေးမြင့် templates များ',
+                
+                // Categories
+                browse_categories: 'အမျိုးအစားများ ကြည့်ရှုရန်',
+                categories_subtitle: 'သင့်နောက်ထပ်ပရောဂျက်အတွက် အကောင်းဆုံး template ကို ရှာဖွေပါ',
+                
+                // Template Shop
+                template_shop: 'Template Shop',
+                shop_subtitle: 'လိုအပ်ချက်တိုင်းအတွက် ထုတ်လုပ်မှုအဆင်သင့် templates',
+                filter_all: 'အားလုံး',
+                filter_business: 'စီးပွားရေး',
+                filter_portfolio: 'Portfolio',
+                filter_saas: 'SaaS',
+                filter_ecommerce: 'Ecommerce',
+                
+                // Why neXa
+                why_nexa: 'neXa ကို ဘာကြောင့် ရွေးချယ်သင့်လဲ',
+                why_subtitle: 'အရည်အသွေးနှင့် ထိရောက်မှုကို တောင်းဆိုသော developer များအတွက် တည်ဆောက်ထားသည်',
+                
+                // Pricing
+                pricing_title: 'ရိုးရှင်းသော ဈေးနှုန်း',
+                pricing_subtitle: 'သင့်လိုအပ်ချက်အတွက် အကောင်းဆုံး plan ကို ရွေးချယ်ပါ',
+                
+                // Testimonials
+                testimonials_title: 'သုံးစွဲသူများ၏ ပြောကြားချက်များ',
+                testimonials_subtitle: 'ထောင်ပေါင်းများစွာသော developer များနှင့် ဖန်တီးသူများ၏ ယုံကြည်မှုကို ရရှိထားသည်',
+                
+                // FAQ
+                faq_title: 'မကြာခဏ မေးလေ့ရှိသော မေးခွန်းများ',
+                faq_subtitle: 'neXa templates အကြောင်း သိထားသင့်သမျှ',
+                
+                // CTA
+                cta_title: 'သင့်နောက်ထပ် ပရောဂျက်ကို တည်ဆောက်ရန် အဆင်သင့်ဖြစ်ပြီလား?',
+                cta_description: 'neXa templates ကို အသုံးပြု၍ ပိုမိုမြန်ဆန်စွာ ထုတ်လုပ်နေသော developer ထောင်ပေါင်းများစွာနှင့် ပူးပေါင်းလိုက်ပါ။',
+                browse_templates: 'Templates ကြည့်ရန်',
+                
+                // Footer
+                footer_description: 'ခေတ်မီဖန်တီးသူများနှင့် developer များအတွက် အရည်အသွေးမြင့် ဒစ်ဂျစ်တယ်ဈေးကွက်။',
+                footer_products: 'ထုတ်ကုန်များ',
+                footer_templates: 'Templates',
+                footer_ui_kits: 'UI Kits',
+                footer_landing_pages: 'Landing Pages',
+                footer_dashboards: 'Dashboards',
+                footer_resources: 'အရင်းအမြစ်များ',
+                footer_docs: 'စာရွက်စာတမ်း',
+                footer_blog: 'Blog',
+                footer_changelog: 'Changelog',
+                footer_community: 'အသိုင်းအဝိုင်း',
+                footer_support: 'အကူအညီ',
+                footer_contact: 'ဆက်သွယ်ရန်',
+                footer_faq: 'FAQ',
+                footer_license: 'လိုင်စင်',
+                footer_privacy: 'ကိုယ်ရေးအချက်အလက်',
+                copyright: 'မူပိုင်ခွင့် အားလုံး လက်ဝယ်ရှိသည်။'
+            }
+        };
+    }
+
+    /**
+     * Setup language toggle button
+     */
+    setupLanguageToggle() {
+        const langToggle = document.getElementById('langToggle');
+        const langText = langToggle.querySelector('.lang-text');
+
+        // Load saved language preference
+        const savedLang = localStorage.getItem('nexa_language');
+        if (savedLang) {
+            this.currentLang = savedLang;
+            langText.textContent = savedLang.toUpperCase();
+        }
+
+        langToggle.addEventListener('click', () => {
+            this.currentLang = this.currentLang === 'en' ? 'mm' : 'en';
+            langText.textContent = this.currentLang.toUpperCase();
+            
+            // Save preference
+            localStorage.setItem('nexa_language', this.currentLang);
+            
+            // Apply translations
+            this.applyTranslations();
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = this.currentLang === 'mm' ? 'my' : 'en';
+        });
+    }
+
+    /**
+     * Apply translations to all elements with data-i18n attribute
+     */
+    applyTranslations() {
+        const elements = document.querySelectorAll('[data-i18n]');
+        const translations = this.translations[this.currentLang];
+
+        elements.forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            
+            if (translations[key]) {
+                // Handle different element types
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.placeholder = translations[key];
+                } else if (element.tagName === 'BUTTON' && element.querySelector('.lang-text')) {
+                    // Skip language toggle button
+                    return;
+                } else {
+                    element.textContent = translations[key];
+                }
+            }
+        });
+
+        // Update FAQ questions if they exist
+        this.updateFAQTranslations();
+    }
+
+    /**
+     * Update FAQ translations
+     */
+    updateFAQTranslations() {
+        // FAQ content can be dynamically updated based on language
+        const faqContainer = document.getElementById('faqList');
+        if (faqContainer && faqContainer.children.length > 0) {
+            // Regenerate FAQs with current language
+            window.dispatchEvent(new CustomEvent('languageChanged', { 
+                detail: { language: this.currentLang } 
+            }));
+        }
+    }
+
+    /**
+     * Get translation for a specific key
+     */
+    getTranslation(key) {
+        return this.translations[this.currentLang][key] || key;
+    }
+
+    /**
+     * Get current language
+     */
+    getCurrentLanguage() {
+        return this.currentLang;
+    }
+}
+
+// Initialize language manager when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    window.languageManager = new LanguageManager();
+});
